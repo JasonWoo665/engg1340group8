@@ -15,6 +15,12 @@ To solve the problem, the system will include the following elements: file input
 
 In practical, the program is expected to adopt filters to search for commodity, append new commodity data, delete obsolete commodity data , update commodity data, which prompts a better inventory management.  Also, inventory status will alerts when it is nearly “out-of-stock” or when it is currently “out-of-stock” in order to prevent a short in commodity.
 
+Assumption:
+Data transfers without delay.
+Allowed to be editted by multi-users at the same time.
+The maximum ammount of commedity is limited.
+The function may not instantly update after transactions from POS system.
+
 **Problem setting:**
 
 With an increasing demand in renowned bands, an inventory with inventory with abundant commodity is crucial.  To meet thw target, a reliable, efficient and multifunctioning inventory system is needed.  Under the control and management of the system, profit can be maximized and unwanted waste, say, exceed stock, can be reduced.  To meet the demand, a commodity inventory system is being developed.
