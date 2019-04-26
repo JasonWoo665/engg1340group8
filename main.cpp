@@ -94,9 +94,10 @@ int read_file(string filename, list mainlist[]){
 //  input   :   list mainlist[] : the list to be sorted
 //              int  n          : the number of items in mainlist[]
 //              string filename : filename of the original file
+//              bool order      : true = ascending order, false = descending order
 //  cin     :   query for save as or replacing current file
 
-void sorting_data(list mainlist[], int n, string filename){
+void sorting_data(list mainlist[], int n, string filename, bool order){
     string name_temp;
     int num_temp;
 
@@ -119,6 +120,27 @@ void sorting_data(list mainlist[], int n, string filename){
         mainlist[m].name=name_temp;
         mainlist[m].number=num_temp;
     }
+
+    //reverse the sorted list if it is in descending order
+    if (!order){
+        cout << "order!" <<endl;
+        int start=0;
+        int ending=n-1;
+        while(start < ending){
+            name_temp=mainlist[start].name;
+            num_temp=mainlist[start].number;
+
+            mainlist[start].name=mainlist[ending].name;
+            mainlist[start].number=mainlist[ending].number;
+
+            mainlist[ending].name=name_temp;
+            mainlist[ending].number=num_temp;
+
+            start++;
+            ending--;
+        }
+    }
+
     char answer=' ';
     while ((answer != 'Y')&&(answer != 'N')){
         cout << "List sorted, replace the original file? (Y/N) ";
@@ -441,22 +463,37 @@ void printlist(list the_list[], int n){
 
 
 int main(){
-    int n= itemcount("dalist.txt");
+    // number of items result from filter
     int filter_length;
+    // used as string input receiver in interface
     string keyword;
+    // used as character input receiver in interface
     char kw;
-    int x,y, seletcted;
+    // used as integer input receiver in interface
+    int x,y
+    // the location of the selected item in main list
+    int seletcted;
+    // new item name and item amount after editing
+    string edit_name;
+    int edit_num;
+
+    cout << "Please enter the filename of the main list: ";
+    string filename;
+    // open the file containing data base
+    int n= itemcount(filename);
     list * mainlist = new list[n];
     list * SearchResult = new list[n];
+    // store the result of a selected item
     list specific_list;
-    n=read_file("dalist.txt", mainlist);
+    // read the file to a list
+    n=read_file(filename, mainlist);
     printlist(mainlist, n);
-    cout << "--------" <<endl;
+    cout <<endl;
 
     int command=0;
     while (command!=7){
     cout << "************************************************************************"<<endl;
-    cout << "The current list is as above, select a command to operate:             *"<<endl;
+    cout << "Select a command to operate:                                           *"<<endl;
     cout << "1. search data                                                         *"<<endl;
     cout << "2. change and update the data                                          *"<<endl;
     cout << "3. sort the data                                                       *"<<endl;
@@ -515,7 +552,7 @@ int main(){
             cout << "-----------------------------------"<<endl;
             cout << "Enter -1 to continue or choose an item to undergo operation : (1-" << filter_length<<")" <<endl;
             cin >>x;
-            if (x>filter_length){
+            if ((x>filter_length)||(x<0)){
                 continue;
             }
             else{
@@ -528,19 +565,84 @@ int main(){
                 switch (y){
                 case 1:
                     deleting(mainlist, seletcted, n);
+                    cout << "Item successfully deleted!" <<endl;
                     break;
                 case 2:
-
-                    edit(mainlist,seletcted, n, )
+                    cout << "Please enter the new item name and number of stock : ";
+                    cin >> edit_name >> edit_num;
+                    edit(mainlist,seletcted, n, edit_name, edit_num);
+                    cout << "Item successfully changed!" <<endl;
+                    break;
+                case 3:
+                    cout << "Please enter the change in amount of stock (can be positive or negative) : ";
+                    cin >> x;
+                    adding(mainlist, seletcted, x);
+                    cout << "Stock number successfully changed!" <<endl;
                 }
             }
         }
-        cout << endl;
+        cout << "Enter any number to continue...  ";
+        cin x;
         break;
     case 2:
+        cout << "change.txt created? (Y/N)" <<endl;
+        cin >> kw;
+        if (kw=='Y'){
+            change(mainlist);
+            cout << filename"" <<endl;
+        }
+        else if(kw=='N'){
+            create_change(mainlist, n);
+            cout << "change.txt created, input data in change.txt for operation" <<endl;
+            cout << "Enter any number to continue...  ";
+            cin >> x;
+            break;
+        }
+        break;
+    case 3:
+        cout << "Please choose the method of sorting: " <<endl;
+        cout << "1. sort by alphabetic order (ascending)"<<endl;
+        cout << "2. sort by alphabetic order (descending)"<<endl;
+        cout << "3. sort by stock number (ascending)"<<endl;
+        cout << "4. sort by stock number (descending)"<<endl;
+        cin >> x;
+        switch(x){
+        case 1:
+            sorting_data(mainlist, n, filename, true);
+            cout << "Data sorted!" <<endl;
+            break;
+        case 2:
+            sorting_data(mainlist, n, filename, false);
+            cout << "Data sorted!" <<endl;
+            break;
+        case 3:
+            sorting_data_number(mainlist, n, filename, true);
+            cout << "Data sorted!" <<endl;
+            break;
+        case 4:
+            sorting_data_number(mainlist, n, filename, false);
+            cout << "Data sorted!" <<endl;
+            break;
+        default:
+            cout << "Fail to sort the data." <<endl;
+            break;
+        }
+        cout << "Enter any number to continue...  ";
+        cin x;
+        break;
+    case 4:
+        cout << "Please enter the stock name and stock number to be appended to the data base : ";
+        cin >> edit_name >> edit_num;
+        adding_data(filename, mainlist, edit_name,edit_num);
+        cout << "Data appended."<< endl;
+        cout << "Enter any number to continue...  ";
+        cin x;
+        break;
+    case 5:
+        printlist(mainlist, n);
+        break;
+    }//end of switch
+    }//end of while(command !=7)
 
-
-    }
-    }
     return 0;
 }
