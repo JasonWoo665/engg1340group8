@@ -1,0 +1,11 @@
+pen 0 
+apple 468 
+orange 6 
+applepie 594 
+bucket 522 
+candy 528 
+sugar 84 
+rubber 540 
+pencil 3402 
+book 0 
+towel 270 
