@@ -2,8 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <stdlib.h>
-#include <cstdio>
+#include <iomanip>
 using namespace std;
 
 //the list for products
@@ -69,7 +68,7 @@ int Tons_of_commands::read_file(string filename, list mainlist[]) {
 				canread = false;
 			}
 		}
-		else 
+		else
 			if (count %3 ==1 ){
 				if (fin >> reading_num) {
 					mainlist[assign_box].number = reading_num;
@@ -78,12 +77,12 @@ int Tons_of_commands::read_file(string filename, list mainlist[]) {
 				canread = false;
 			}
 			}
-			else 
-				if (count %3 == 2) 
+			else
+				if (count %3 == 2)
 					fin >> reading_str;
 				else
-					canread = false;	
-				
+					canread = false;
+
 		count++;
 	}
 	fin.close();
@@ -150,12 +149,12 @@ void Tons_of_commands::read_filer(string filename, list mainlist[]){
     bool canread=true;
     while (canread){
     	if (i%8 == 0){
-    		if (fin >> reading_name){	
+    		if (fin >> reading_name){
     			i += 1;
     		}
     		else
     			canread = false;
-    	
+
     	}
     	else
     		if (fin >> reading_num){
@@ -206,7 +205,7 @@ void Tons_of_commands::updater(list mainlist[], string filename, int n) {
 	}
 	// save the records into the mainlist
 	for (int i = 0; i < n; i++) {
-		fout << mainlist[i].name << " ";		
+		fout << mainlist[i].name << " ";
 		for (int j = 0; j < 7; j++){
 			fout << mainlist[i].rec[j] << " ";
 		}
@@ -218,8 +217,8 @@ void Tons_of_commands::updater(list mainlist[], string filename, int n) {
 // alertcheck : check and give alert to outofstock item
 // input : list mainlist[] : the list containing all data records
 // output : a message reminding that a specific type of commedity is out of stock
-void Tons_of_commands::alertcheck(list mainlist[]) {
-	for (int i = 0; i < itemcount("dalist.txt"); i++) {
+void Tons_of_commands::alertcheck(list mainlist[], int n) {
+	for (int i = 0; i < n; i++) {
 		if (mainlist[i].number <= 0) {
 			cout << "** "<<mainlist[i].name << " is out-of-stock! Please increase the inventory! **" << endl;
 		}
@@ -294,7 +293,7 @@ void Tons_of_commands::sorting_data(list mainlist[], int n, string filename, boo
 			ending--;
 		}
 	}
-	
+
 	// Handling case when the sorted file is not expected to rewrite the original txt file
 	// A new file named sorted.txt will be opened to save the record if the sorted file is
 	// not expected to rewrite the original txt file
@@ -390,7 +389,7 @@ void Tons_of_commands::sorting_data_number(list mainlist[], int n, string filena
 			for (int z = 0; z < 7; z++){
 				arr_temp[z] = mainlist[start].rec[z];
 			}
-			
+
 
 			mainlist[start].name = mainlist[ending].name;
 			mainlist[start].number = mainlist[ending].number;
@@ -403,7 +402,7 @@ void Tons_of_commands::sorting_data_number(list mainlist[], int n, string filena
 			for (int z = 0; z < 7; z++){
 				mainlist[ending].rec[z] = arr_temp[z];
 			}
-			
+
 
 			start++;
 			ending--;
@@ -676,7 +675,7 @@ void Tons_of_commands::change(list mainlist[]) {
 		}
 		mainlist[i].rec[7-1] = mainlist[i].number;
 	}
-	
+
 }
 
 
@@ -685,11 +684,11 @@ void Tons_of_commands::change(list mainlist[]) {
 //          int n : the number of items inside the list
 void Tons_of_commands::printlist(list the_list[], int n) {
 	for (int i = 0; i < n; i++) {
-		cout << i + 1 << ". " << the_list[i].name << " : " << the_list[i].number << " ";
+		cout << i + 1 << "." << "\t"<< setw(15) << the_list[i].name << " : " <<"\t"<< the_list[i].number << " ";
 		if (the_list[i].number <= 0)
-			cout << " : "<< "Out-of-stock" << endl;
+			cout << "\t"<<" : "<<"\t"<< "Out-of-stock" << endl;
 		else
-			cout << " : "<< "In-stock" << endl;
+			cout <<"\t"<< " : "<<"\t"<< "In-stock" << endl;
 	}
 }
 
@@ -697,64 +696,12 @@ void Tons_of_commands::printlist(list the_list[], int n) {
 // input :  list the_list :the list to be printed
 //          int n : the number of items inside the list
 void Tons_of_commands::printlistr(list the_list[], int n) {
+    cout << "\t" <<"\t" <<"\t" <<"\t" << "<oldest------------latest>" << endl;
 	for (int i = 0; i < n; i++) {
-		cout << i + 1 << ". " << the_list[i].name << " ";		
+		cout << i + 1 << "." <<"\t"<< setw(15) << the_list[i].name<< "\t";
 		for (int j = 0; j < 7; j++){
-			cout << the_list[i].rec[j] << " ";
+			cout << the_list[i].rec[j] << "\t";
 		}
 		cout << endl;
 	}
-}
-//calculate summation : calculate the sum of numbers in an array
-// input : int sumarr[] : the array containing numbers
-//	   int n	: number of items inside array
-double Tons_of_commands::summaty(int sumarr[],int n) {
-	int sum = 0;
-	for (int i = 0; i < n; i++){
-		sum = sum + sumarr[i];
-	}
-	return sum;
-}
-//calculate summation : calculate 
-double Tons_of_commands::summatxx(int sumarr[], int n) {
-	int sum = 0;
-	for (int i = 0; i < n; i++){
-		sum = sum + (i+1)*(i+1);
-	}
-	return sum;
-}
-//calculate summation
-double Tons_of_commands::summatxx(int sumarr[], int n) {
-	int sum = 0;
-	for (int i = 0; i < n; i++){
-		sum = sum + (i+1)*(i+1);
-	}
-	return sum;
-}
-double Tons_of_commands::summatxy(int sumarr1[], int n) {
-	int sum = 0;
-	for (int i = 0; i < n; i++){
-		sum = sum + sumarr1[i]*(i+1);
-	}
-	return sum;
-}
-//calculate summation
-double Tons_of_commands::summatx(int n){
-    int sum = 0;
-    for (int i = 1; i < n+1; i++){
-        sum += i;
-    }
-    return sum;
-}
-//calculate least square method
-double Tons_of_commands::lsm(int arr[], int n) {
-	double bx, bc, x, y, xy, xx;
-	xy = summatxy(arr, n);
-	xx = summatxx(arr, n);
-	x = summatx(n)/n;
-	y = summaty(arr, n)/n;
-	bx = (xy-n*x*y)/(xx-n*x*x);
-	bc = y- bx*x;
-	cout << bx << " "<< bc;
-	return 0;
 }
