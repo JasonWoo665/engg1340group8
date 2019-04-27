@@ -22,43 +22,43 @@ Assumption:
 4. A basic commedity txt document containing some data exist.
 5. (record).txt(for record) and (data).txt(for data) must be prepared before running the code.
 6. The txt file containing the current data is not named as "change.txt" or "record.txt".  These two file name will be used by some features.
-7. the order and number of items in text files of record.txt, data.txt and change.txt should be the same. The samples are shown below:
-_ _**(data).txt(for data) samples**
- pen 0 Out-of-stock
- apple 468 In-stock
- orange 6 In-stock
- applepie 594 In-stock
- bucket 522 In-stock
- candy 528 In-stock
- sugar 84 In-stock
- rubber 540 In-stock
- pencil 3402 In-stock
- book 0 Out-of-stock
- towel 270 In-stock_ _
-_ _**(record).txt(for record) samples**
- pen 0 Out-of-stock 
- apple 468 In-stock 
- orange 6 In-stock
- applepie 594 In-stock
- bucket 522 In-stock
- candy 528 In-stock
- sugar 84 In-stock
- rubber 540 In-stock
- pencil 3402 In-stock
- book 0 Out-of-stock
- towel 270 In-stock _ _
-_ _**change.txt (for changing) samples**
- pen 0 Out-of-stock
- apple 468 In-stock
- orange 6 In-stock
- applepie -3 In-stock
- bucket 522 In-stock
- candy 528 In-stock
- sugar 84 In-stock
- rubber -6 In-stock
- pencil 3402 In-stock
- book 0 Out-of-stock
- towel 270 In-stock _ _
+7. the order and number of items in text files of record.txt, data.txt and change.txt should be the same. The samples are shown below:  
+ _**(data).txt(for data) samples**  
+pen 0 Out-of-stock  
+apple 468 In-stock  
+orange 6 In-stock  
+applepie 594 In-stock  
+bucket 522 In-stock  
+candy 528 In-stock  
+sugar 84 In-stock  
+rubber 540 In-stock  
+pencil 3402 In-stock  
+book 0 Out-of-stock  
+towel 270 In-stock_   
+ _**(record).txt(for record) sample**  
+pen 21 58 34 54 64 78 0  
+apple 0 21 58 34 54 64 468  
+orange 5 10 70 20 80 86 6  
+applepie 56 213 60 324 521 307 594  
+bucket 60 180 70 600 230 250 522  
+candy 70 600 230 250 546 300 528  
+sugar 80 69 90 100 90 56 84  
+rubber 10 260 700 685 230 456 540  
+pencil 506 900 3045 6245 3000 2300 3402  
+book 15 70 45 60 50 78 0  
+towel 45 678 540 640 135 200 270_   
+ _**change.txt (for changing) sample**  
+pen 0  
+apple 468  
+orange 6  
+applepie -3  
+bucket 522  
+candy 528  
+sugar 84  
+rubber -6  
+pencil 3402  
+book 0  
+towel 270_   
 
 
 
@@ -67,7 +67,6 @@ _ _**change.txt (for changing) samples**
 With an increasing demand in renowned bands, an inventory with inventory with abundant commodity is crucial.  To meet the target, a reliable, efficient and multifunctioning inventory system is needed.  Under the control and management of the system, profit can be maximized and unwanted waste, say, exceed stock, can be reduced.  To meet the demand, a commodity inventory system is being developed.
 
 **basic program features introduction:**
-The user should input the file name of the data base first, then the file name of the data base of the past records.  For example in the given files, the user should input "data.txt" first, then "record.txt" in order to start the program.
 In the beginning of the program, user can select 6 commands to operate.  The 7th command means to leave the program.  The commands are as follow:
 
 1. Search data:
