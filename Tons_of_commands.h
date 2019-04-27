@@ -20,6 +20,11 @@ class Tons_of_commands
 
     public:
         Tons_of_commands();
+	double lsm(int arr[], int n);
+	double summatx(int n);
+	double summatxy(int sumarr1[], int n);
+	double summatxx(int sumarr[], int n);
+	double summaty(int sumarr[],int n);
 	void printlistr(list the_list[], int n);
         void printlist(list the_list[], int n);
         void updater(list mainlist[], string filename, int n);
@@ -34,8 +39,8 @@ class Tons_of_commands
         int FilterByStarting(list mainlist[], list filtered[], char letter, int n);
         int FilterByKeyword(list mainlist[], list filtered[], string keyword, int n);
         void adding_data(string  filename,list mainlist[], string name,int num, int &n);
-        void sorting_data_number(list mainlist[], int n, string filename, bool order);
-        void sorting_data(list mainlist[], int n, string filename, bool order);
+        void sorting_data_number(list mainlist[], int n, string filename, bool order, string filename2);
+        void sorting_data(list mainlist[], int n, string filename, bool order, string filename2);
         void alertcheck(list mainlist[]);
         void read_filer(string filename, list mainlist[]);
 	int read_file2(string filename, list mainlist[]);
