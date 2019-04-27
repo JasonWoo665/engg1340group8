@@ -96,3 +96,7 @@ In the beginning of the program, user can select 6 commands to operate.  The 7th
 2. Fours types of sorting are provided, the sorted data can either rewrite the original data file or being presented in another file (sorted.txt).
 3. Past data records (up to the 7th last editted record) can be traced
 4. Data is managed as fast as possible as the sorting functions used the selection sort
+
+**Sample running**
+The program should run like this:
+https://imgur.com/MzGfIms
