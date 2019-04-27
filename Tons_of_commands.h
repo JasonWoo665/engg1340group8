@@ -20,7 +20,7 @@ class Tons_of_commands
 
     public:
         Tons_of_commands();
-        void printlistr(list the_list[], int n);
+	void printlistr(list the_list[], int n);
         void printlist(list the_list[], int n);
         void updater(list mainlist[], string filename, int n);
         void change(list mainlist[]);
@@ -37,7 +37,8 @@ class Tons_of_commands
         void sorting_data_number(list mainlist[], int n, string filename, bool order);
         void sorting_data(list mainlist[], int n, string filename, bool order);
         void alertcheck(list mainlist[]);
-        int read_file2(string filename, list mainlist[]);
+        void read_filer(string filename, list mainlist[]);
+	int read_file2(string filename, list mainlist[]);
         int read_file(string filename, list mainlist[]);
         int itemcount(string filename);
 
