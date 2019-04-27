@@ -3,11 +3,6 @@
 #include <string>
 using namespace std;
 
-//*******************************//
-//
-//please delete the dynamic struct array at the end
-//
-
 // printlist : print a list out
 // input :  list the_list :the list to be printed
 //          int n : the number of items inside the list
@@ -123,7 +118,6 @@ void sorting_data(list mainlist[], int n, string filename, bool order){
 
     //reverse the sorted list if it is in descending order
     if (!order){
-        cout << "order!" <<endl;
         int start=0;
         int ending=n-1;
         while(start < ending){
@@ -206,7 +200,6 @@ void sorting_data_number(list mainlist[], int n, string filename, bool order){
     }
     //reverse the sorted list if it is in descending order
     if (!order){
-        cout << "order!" <<endl;
         int start=0;
         int ending=n-1;
         while(start < ending){
@@ -257,13 +250,14 @@ void sorting_data_number(list mainlist[], int n, string filename, bool order){
     }
 }
 
-// adding_data  :   append data record to the file and update the main list
+// adding_data  :   append data record to the file
 // input :  string filename :   the file to be appended
 //          list mainlist[] : the main list storing data
 //          string name: the new appended item name
-//          int num : the new appended item num
+//          int num : the new appended item number
+//          int n : the number of item inside mainlist
 
- void adding_data(string  filename,list mainlist[], string name,int num){
+ void adding_data(string  filename,list mainlist[], string name,int num, int &n){
     ofstream fout;
     fout.open(filename.c_str(),ios::app);
     if (fout.fail()){
@@ -271,8 +265,9 @@ void sorting_data_number(list mainlist[], int n, string filename, bool order){
         exit(1);
     }
     fout << name << ' ' <<num <<endl;
-    read_file(filename,mainlist);
     fout.close();
+    mainlist[n]={name, num};
+    n+=1;
 }
 
 // FilterByKeyword    :   search by keyword
@@ -463,6 +458,7 @@ void printlist(list the_list[], int n){
 
 
 int main(){
+    string filename;
     // number of items result from filter
     int filter_length;
     // used as string input receiver in interface
@@ -470,18 +466,21 @@ int main(){
     // used as character input receiver in interface
     char kw;
     // used as integer input receiver in interface
-    int x,y
+    int x,y;
     // the location of the selected item in main list
-    int seletcted;
+    int selected;
     // new item name and item amount after editing
     string edit_name;
     int edit_num;
 
+
     cout << "Please enter the filename of the main list: ";
-    string filename;
+    cin >> filename;
+
     // open the file containing data base
     int n= itemcount(filename);
-    list * mainlist = new list[n];
+
+    list * mainlist = new list[100];
     list * SearchResult = new list[n];
     // store the result of a selected item
     list specific_list;
@@ -556,7 +555,7 @@ int main(){
                 continue;
             }
             else{
-                seletcted=select(mainlist, SearchResult, n, x, specific_list);
+                selected=select(mainlist, SearchResult, n, x, specific_list);
                 cout << "Select which kind of operation to undergo: "<<endl;
                 cout << "1. Delete the item" << endl;
                 cout << "2. Edit the item" <<endl;
@@ -564,32 +563,35 @@ int main(){
                 cin >> y;
                 switch (y){
                 case 1:
-                    deleting(mainlist, seletcted, n);
+                    deleting(mainlist, selected, n);
                     cout << "Item successfully deleted!" <<endl;
                     break;
                 case 2:
                     cout << "Please enter the new item name and number of stock : ";
                     cin >> edit_name >> edit_num;
-                    edit(mainlist,seletcted, n, edit_name, edit_num);
+                    edit(mainlist,selected, n, edit_name, edit_num);
                     cout << "Item successfully changed!" <<endl;
                     break;
                 case 3:
                     cout << "Please enter the change in amount of stock (can be positive or negative) : ";
                     cin >> x;
-                    adding(mainlist, seletcted, x);
+                    adding(mainlist, selected, x);
                     cout << "Stock number successfully changed!" <<endl;
                 }
             }
         }
         cout << "Enter any number to continue...  ";
-        cin x;
+        cin >> x;
         break;
     case 2:
         cout << "change.txt created? (Y/N)" <<endl;
         cin >> kw;
         if (kw=='Y'){
             change(mainlist);
-            cout << filename"" <<endl;
+            update(mainlist, filename, n);
+            cout << filename<<" changed!" <<endl;
+            cout << "Enter any number to continue...  ";
+            cin >> x;
         }
         else if(kw=='N'){
             create_change(mainlist, n);
@@ -628,18 +630,21 @@ int main(){
             break;
         }
         cout << "Enter any number to continue...  ";
-        cin x;
+        cin >> x;
         break;
     case 4:
         cout << "Please enter the stock name and stock number to be appended to the data base : ";
         cin >> edit_name >> edit_num;
-        adding_data(filename, mainlist, edit_name,edit_num);
+        adding_data(filename, mainlist, edit_name,edit_num, n);
+
         cout << "Data appended."<< endl;
         cout << "Enter any number to continue...  ";
-        cin x;
+        cin >> x;
         break;
     case 5:
         printlist(mainlist, n);
+        cout << "Enter any number to continue...  ";
+        cin >> x;
         break;
     }//end of switch
     }//end of while(command !=7)
