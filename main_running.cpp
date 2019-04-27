@@ -51,14 +51,14 @@ int main() {
 	int command = 0;
 	while (command != 7) {
 		cout << "************************************************************************" << endl;
-		cout << "Select a command to operate:                                           *" << endl;
-		cout << "1. search data                                                         *" << endl;
-		cout << "2. change and update the data                                          *" << endl;
-		cout << "3. sort the data                                                       *" << endl;
-		cout << "4. append new data                                                     *" << endl;
-		cout << "5. show the list of data                                               *" << endl;
-		cout << "6. predict demand in the future                                        *" << endl;
-		cout << "7. EXIT                                                                *" << endl;
+		cout << "*	Select a command to operate:                                    *" << endl;
+		cout << "*	1. search data                                                  *" << endl;
+		cout << "*	2. change and update the data                                   *" << endl;
+		cout << "*	3. sort the data                                                *" << endl;
+		cout << "*	4. append new data                                              *" << endl;
+		cout << "*	5. show the list of data                                        *" << endl;
+		cout << "*	6. predict demand in the future                                 *" << endl;
+		cout << "*	7. EXIT                                                         *" << endl;
 		cout << "************************************************************************" << endl;
 		cout << "->Enter your great command here : ";
 		cin >> command;
