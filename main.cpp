@@ -3,6 +3,11 @@
 #include <string>
 using namespace std;
 
+//*******************************//
+//
+//please delete the dynamic struct array at the end
+//
+
 // printlist : print a list out
 // input :  list the_list :the list to be printed
 //          int n : the number of items inside the list
@@ -578,6 +583,7 @@ int main(){
                     adding(mainlist, selected, x);
                     cout << "Stock number successfully changed!" <<endl;
                 }
+                update(mainlist, filename, n);
             }
         }
         cout << "Enter any number to continue...  ";
@@ -595,7 +601,7 @@ int main(){
         }
         else if(kw=='N'){
             create_change(mainlist, n);
-            cout << "change.txt created, input data in change.txt for operation" <<endl;
+            cout << "An empty change.txt created, input data in change.txt for further operation" <<endl;
             cout << "Enter any number to continue...  ";
             cin >> x;
             break;
