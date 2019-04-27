@@ -16,15 +16,55 @@ To solve the problem, the system will include the following elements: file input
 In practical, the program is expected to adopt filters to search for commodity, append new commodity data, delete obsolete commodity data , update commodity data, which prompts a better inventory management.  Also, inventory status will alerts when it is nearly “out-of-stock” or when it is currently “out-of-stock” in order to prevent a short in commodity.
 
 Assumption:
-If there is a change in all amount of all types of data, user need to input the change in amount in change.txt
-The maximum ammount of types of commedity is limited within 100.
-Inputs are in valid data type, invalid inputs with corect datatype will be skipped and the program will be recursed.
-A basic commedity txt document containing some data exist.
-The predicted demand is based on the past 7 days records and the current records only
-The txt file containing the current data is not named as "change.txt" or "record.txt".  These two file name will be used by some features.
+1. If there is a change in all amount of all types of data, user need to input the change in amount in change.txt
+2. The maximum ammount of types of commedity is limited within 100.
+3. Inputs are in valid data type, invalid inputs with corect datatype will be skipped and the program will be recursed.
+4. A basic commedity txt document containing some data exist.
+5. (record).txt(for record) and (data).txt(for data) must be prepared before running the code.
+6. The txt file containing the current data is not named as "change.txt" or "record.txt".  These two file name will be used by some features.
+7. the order and number of items in text files of record.txt, data.txt and change.txt should be the same. The samples are shown below:
+_ _**(data).txt(for data) samples**
+pen 0 Out-of-stock
+apple 468 In-stock
+orange 6 In-stock
+applepie 594 In-stock
+bucket 522 In-stock
+candy 528 In-stock
+sugar 84 In-stock
+rubber 540 In-stock
+pencil 3402 In-stock
+book 0 Out-of-stock
+towel 270 In-stock_ _
+_ _**(record).txt(for record) samples**
+pen 0 Out-of-stock
+apple 468 In-stock
+orange 6 In-stock
+applepie 594 In-stock
+bucket 522 In-stock
+candy 528 In-stock
+sugar 84 In-stock
+rubber 540 In-stock
+pencil 3402 In-stock
+book 0 Out-of-stock
+towel 270 In-stock _ _
+_ _**change.txt (for changing) samples**
+pen 0 Out-of-stock
+apple 468 In-stock
+orange 6 In-stock
+applepie 594 In-stock
+bucket 522 In-stock
+candy 528 In-stock
+sugar 84 In-stock
+rubber 540 In-stock
+pencil 3402 In-stock
+book 0 Out-of-stock
+towel 270 In-stock _ _
+
+
+
 
 **Problem setting:**
-With an increasing demand in renowned bands, an inventory with inventory with abundant commodity is crucial.  To meet thw target, a reliable, efficient and multifunctioning inventory system is needed.  Under the control and management of the system, profit can be maximized and unwanted waste, say, exceed stock, can be reduced.  To meet the demand, a commodity inventory system is being developed.
+With an increasing demand in renowned bands, an inventory with inventory with abundant commodity is crucial.  To meet the target, a reliable, efficient and multifunctioning inventory system is needed.  Under the control and management of the system, profit can be maximized and unwanted waste, say, exceed stock, can be reduced.  To meet the demand, a commodity inventory system is being developed.
 
 **basic program features introduction:**
 In the beginning of the program, user can select 6 commands to operate.  The 7th command means to leave the program.  The commands are as follow:
@@ -51,10 +91,8 @@ In the beginning of the program, user can select 6 commands to operate.  The 7th
 5. Showing the data
    The program will show both the current data and past records.  Difference in data saving in the program and data saving in txt won't have any difference during program compilation.
    
-**Exctra program feature(s):**
+**Extra program feature(s):**
 1. The data base (the txt file containing all data) will update immediately after any amendment.
 2. Fours types of sorting are provided, the sorted data can either rewrite the original data file or being presented in another file (sorted.txt).
 3. Past data records (up to the 7th last editted record) can be traced
 4. Data is managed as fast as possible as the sorting functions used the selection sort
-5. (predict amount of stock in demand in the future by algorithms)
-6. (If the amount predicted is below zero, a warning will be given and the function will suggest an amount of commodities needed for the coming week.  This further prevents a short in commodity and even prevents a specific commodities overwhelming.)
