@@ -99,4 +99,4 @@ In the beginning of the program, user can select 6 commands to operate.  The 7th
 
 **Sample running**
 The program should run like this:
-https://imgur.com/MzGfIms
+https://imgur.com/r3r4k7Z
