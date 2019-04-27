@@ -131,6 +131,9 @@ int Tons_of_commands::read_file2(string filename, list mainlist[]){
     return count/2;
 }
 
+// read_filer : read the record file putting in the same file with data base
+// input : string filename : filename of the record file
+// output: list mainlist[] : the list containing all data records (the current and the past)
 void Tons_of_commands::read_filer(string filename, list mainlist[]){
 	string reading_name;
     int reading_num;
@@ -163,6 +166,7 @@ void Tons_of_commands::read_filer(string filename, list mainlist[]){
     			canread = false;
 		}
 }
+
 // update/updater : update the file, usually used after adding, editing or deleting data
 // input : list mainlist[] : the list containing all data
 //         string filename : the file name saving the updated mainlist[]
@@ -176,6 +180,7 @@ void Tons_of_commands::update(list mainlist[], string filename, int n) {
 		cout << "fail to open " << filename << endl;
 		exit(1);
 	}
+	//check which item is currently out-of-stock
 	for (int i = 0; i < n; i++) {
 		fout << mainlist[i].name << ' ' << mainlist[i].number << ' ';
 		if (mainlist[i].number <= 0)
@@ -185,10 +190,12 @@ void Tons_of_commands::update(list mainlist[], string filename, int n) {
 	}
 	fout.close();
 }
+
 //Updater : to update the record of record.txt (a txt file containing past data)
 // input  : list mainlist[] : the largest list containing all current data
 //          string filename : the filename of the record.txt
 //          int n : the number of items in the largest list containing all current data
+
 void Tons_of_commands::updater(list mainlist[], string filename, int n) {
 	//open the file for overwriting the old version
 	ofstream fout;
@@ -197,6 +204,7 @@ void Tons_of_commands::updater(list mainlist[], string filename, int n) {
 		cout << "fail to open " << filename << endl;
 		exit(1);
 	}
+	// save the records into the mainlist
 	for (int i = 0; i < n; i++) {
 		fout << mainlist[i].name << " ";		
 		for (int j = 0; j < 7; j++){
@@ -207,7 +215,9 @@ void Tons_of_commands::updater(list mainlist[], string filename, int n) {
 	fout.close();
 }
 
-// alert : check and give alert to outofstock item
+// alertcheck : check and give alert to outofstock item
+// input : list mainlist[] : the list containing all data records
+// output : a message reminding that a specific type of commedity is out of stock
 void Tons_of_commands::alertcheck(list mainlist[]) {
 	for (int i = 0; i < itemcount("dalist.txt"); i++) {
 		if (mainlist[i].number <= 0) {
@@ -284,7 +294,10 @@ void Tons_of_commands::sorting_data(list mainlist[], int n, string filename, boo
 			ending--;
 		}
 	}
-
+	
+	// Handling case when the sorted file is not expected to rewrite the original txt file
+	// A new file named sorted.txt will be opened to save the record if the sorted file is
+	// not expected to rewrite the original txt file
 	char answer = ' ';
 	while ((answer != 'Y') && (answer != 'N')) {
 		cout << "List sorted, replace the original file? (Y/N) ";
@@ -396,7 +409,9 @@ void Tons_of_commands::sorting_data_number(list mainlist[], int n, string filena
 			ending--;
 		}
 	}
-
+	// Handling case when the sorted file is not expected to rewrite the original txt file
+	// A new file named sorted.txt will be opened to save the record if the sorted file is
+	// not expected to rewrite the original txt file
 	char answer = ' ';
 	while ((answer != 'Y') && (answer != 'N')) {
 		cout << "List sorted, replace the original file? (Y/N) ";
@@ -447,6 +462,7 @@ void Tons_of_commands::sorting_data_number(list mainlist[], int n, string filena
 //          int n : the number of item inside mainlist
 
 void Tons_of_commands::adding_data(string  filename,list mainlist[], string name,int num, int &n){
+    // append the data to the file
     ofstream fout;
     fout.open(filename.c_str(),ios::app);
     if (fout.fail()){
@@ -455,6 +471,7 @@ void Tons_of_commands::adding_data(string  filename,list mainlist[], string name
     }
     fout << name << ' ' <<num <<endl;
     fout.close();
+    // append the data to the mainlist
     mainlist[n].name = name;
     mainlist[n].number = num;
     for (int i = 0; i < n;i++)
@@ -475,6 +492,7 @@ int Tons_of_commands::FilterByKeyword(list mainlist[], list filtered[], string k
 	string temp;
 	//number of items filtered
 	int addcount = 0;
+	//create the filtered list (which is the searching result)
 	for (int i = 0; i < n; i++) {
 		temp = mainlist[i].name;
 		if (((temp.find(keyword, 0)) < (temp.length())) && ((temp.find(keyword, 0)) >= 0)) {
@@ -564,14 +582,15 @@ int Tons_of_commands::select(list mainlist[], list chosen_list[], int n, int ser
 //         int &n : number of items inside mainlist[]
 
 void Tons_of_commands::deleting(list mainlist[], int location, int &n) {
+	// find the item to be deleted
 	for (int i = location; i < n - 1; i++) {
 		mainlist[i].name = mainlist[i + 1].name;
 		mainlist[i].number = mainlist[i + 1].number;
 		for (int z = 0; z < 7; z++){
 				mainlist[i].rec[z] = mainlist[i+1].rec[z];
-			}
-		
+		}
 	}
+	// fix the mainlist after deleting an item
 	mainlist[n - 1].name = char(0);
 	mainlist[n - 1].number = 0;
 	for (int z = 0; z < 7; z++){
@@ -588,6 +607,7 @@ void Tons_of_commands::deleting(list mainlist[], int location, int &n) {
 //         int number : the new number of stock of the selected item
 
 void Tons_of_commands::edit(list mainlist[], int location, int n, string item_name, int number) {
+	// locate the item and overwrite the old item
 	for (int i = 0; i < n; i++) {
 		if (i == location) {
 			mainlist[i].name = item_name;
@@ -607,21 +627,26 @@ void Tons_of_commands::edit(list mainlist[], int location, int n, string item_na
 //         int add : the  number of stock to be added to the selected item
 
 void Tons_of_commands::adding(list mainlist[], int location, int add) {
+	// find the located item in the list
 	if (mainlist[location].number + add > 0) {
 		mainlist[location].number += add;
 	}
-	else
+	else{
 		if (mainlist[location].number + add <= 0) {
 			mainlist[location].number = 0;
 			cout << "Alert! " << mainlist[location].name << " is out-of-stock" << endl;
 		}
+	}
+	// add the amount of the type of commedity and update the record of changes
 	for (int i = 0; i < 7-1; i ++ ){
 		mainlist[location].rec[i] =  mainlist[location].rec[i+1];
 	}
 	mainlist[location].rec[7-1] = mainlist[location].number;
 }
 
-//create_change : create change.txt for user to edit
+//create_change : create a file called change.txt for user to edit
+// input : list mainlist[] : the list containing all name of all types of commedity
+//         int n	   : types of commedity inside the mainlist
 void Tons_of_commands::create_change(list mainlist[], int n) {
 	ofstream fout;
 	fout.open("change.txt");
@@ -637,11 +662,13 @@ void Tons_of_commands::create_change(list mainlist[], int n) {
 
 // change  : change the mainlist[] by adopting a change.txt file
 // input   : list mainlist[] : the main list storing data being changed
+// output  : a changed changed.txt will be created
 void Tons_of_commands::change(list mainlist[]) {
 	//number of lines in change.txt
 	int n = itemcount("change.txt");
 	list * changelist = new list[n];
 	read_file2("change.txt", changelist);
+	// recording the changes to record  list
 	for (int i = 0; i < n; i++) {
 		mainlist[i].number += changelist[i].number;
 		for (int j = 0; j < 7-1; j ++ ){
@@ -651,7 +678,6 @@ void Tons_of_commands::change(list mainlist[]) {
 	}
 	
 }
-
 
 
 // printlist : print a list out
@@ -679,7 +705,9 @@ void Tons_of_commands::printlistr(list the_list[], int n) {
 		cout << endl;
 	}
 }
-//calculate summation
+//calculate summation : calculate the sum of numbers in an array
+// input : int sumarr[] : the array containing numbers
+//	   int n	: number of items inside array
 double Tons_of_commands::summaty(int sumarr[],int n) {
 	int sum = 0;
 	for (int i = 0; i < n; i++){
@@ -687,7 +715,7 @@ double Tons_of_commands::summaty(int sumarr[],int n) {
 	}
 	return sum;
 }
-//calculate summation
+//calculate summation : calculate 
 double Tons_of_commands::summatxx(int sumarr[], int n) {
 	int sum = 0;
 	for (int i = 0; i < n; i++){
