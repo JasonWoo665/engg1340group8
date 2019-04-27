@@ -67,6 +67,7 @@ _ _**change.txt (for changing) samples**
 With an increasing demand in renowned bands, an inventory with inventory with abundant commodity is crucial.  To meet the target, a reliable, efficient and multifunctioning inventory system is needed.  Under the control and management of the system, profit can be maximized and unwanted waste, say, exceed stock, can be reduced.  To meet the demand, a commodity inventory system is being developed.
 
 **basic program features introduction:**
+The user should input the file name of the data base first, then the file name of the data base of the past records.  For example in the given files, the user should input "data.txt" first, then "record.txt" in order to start the program.
 In the beginning of the program, user can select 6 commands to operate.  The 7th command means to leave the program.  The commands are as follow:
 
 1. Search data:
