@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
     Tons_of_commands Tons_of_commands;
-	string filename;
+	string filename,filename2;
 	// number of items result from filter
 	int filter_length;
 	// used as string input receiver in interface
@@ -29,6 +29,8 @@ int main() {
 
 	cout << "Please enter the filename of the main list: ";
 	cin >> filename;
+	cout << "Please enter the filename of the record list: ";
+	cin >> filename2;
 
 	// open the file containing data base
 	int n = Tons_of_commands.itemcount(filename);
@@ -39,7 +41,11 @@ int main() {
 	list specific_list;
 	// read the file to a list
 	n = Tons_of_commands.read_file(filename, mainlist);
+	cout << "List of data:" << endl;
 	Tons_of_commands.printlist(mainlist, n);
+	Tons_of_commands.read_filer(filename2, mainlist);
+	cout << "List of record:" << endl;
+	Tons_of_commands.printlistr(mainlist, n);
 	cout << endl;
 
 	int command = 0;
@@ -198,7 +204,10 @@ int main() {
 			cin >> x;
 			break;
 		case 5:
+			cout << "List of data:" << endl;
 			Tons_of_commands.printlist(mainlist, n);
+			cout << "List of record:" << endl;
+			Tons_of_commands.printlistr(mainlist, n);
 			cout << "Enter any number to continue...  ";
 			cin >> x;
 			break;
