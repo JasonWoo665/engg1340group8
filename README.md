@@ -24,41 +24,41 @@ Assumption:
 6. The txt file containing the current data is not named as "change.txt" or "record.txt".  These two file name will be used by some features.
 7. the order and number of items in text files of record.txt, data.txt and change.txt should be the same. The samples are shown below:
 _ _**(data).txt(for data) samples**
-pen 0 Out-of-stock
-apple 468 In-stock
-orange 6 In-stock
-applepie 594 In-stock
-bucket 522 In-stock
-candy 528 In-stock
-sugar 84 In-stock
-rubber 540 In-stock
-pencil 3402 In-stock
-book 0 Out-of-stock
-towel 270 In-stock_ _
+ pen 0 Out-of-stock
+ apple 468 In-stock
+ orange 6 In-stock
+ applepie 594 In-stock
+ bucket 522 In-stock
+ candy 528 In-stock
+ sugar 84 In-stock
+ rubber 540 In-stock
+ pencil 3402 In-stock
+ book 0 Out-of-stock
+ towel 270 In-stock_ _
 _ _**(record).txt(for record) samples**
-pen 0 Out-of-stock
-apple 468 In-stock
-orange 6 In-stock
-applepie 594 In-stock
-bucket 522 In-stock
-candy 528 In-stock
-sugar 84 In-stock
-rubber 540 In-stock
-pencil 3402 In-stock
-book 0 Out-of-stock
-towel 270 In-stock _ _
+ pen 0 Out-of-stock 
+ apple 468 In-stock 
+ orange 6 In-stock
+ applepie 594 In-stock
+ bucket 522 In-stock
+ candy 528 In-stock
+ sugar 84 In-stock
+ rubber 540 In-stock
+ pencil 3402 In-stock
+ book 0 Out-of-stock
+ towel 270 In-stock _ _
 _ _**change.txt (for changing) samples**
-pen 0 Out-of-stock
-apple 468 In-stock
-orange 6 In-stock
-applepie 594 In-stock
-bucket 522 In-stock
-candy 528 In-stock
-sugar 84 In-stock
-rubber 540 In-stock
-pencil 3402 In-stock
-book 0 Out-of-stock
-towel 270 In-stock _ _
+ pen 0 Out-of-stock
+ apple 468 In-stock
+ orange 6 In-stock
+ applepie 594 In-stock
+ bucket 522 In-stock
+ candy 528 In-stock
+ sugar 84 In-stock
+ rubber 540 In-stock
+ pencil 3402 In-stock
+ book 0 Out-of-stock
+ towel 270 In-stock _ _
 
 
 
