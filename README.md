@@ -51,11 +51,11 @@ _ _**change.txt (for changing) samples**
  pen 0 Out-of-stock
  apple 468 In-stock
  orange 6 In-stock
- applepie 594 In-stock
+ applepie -3 In-stock
  bucket 522 In-stock
  candy 528 In-stock
  sugar 84 In-stock
- rubber 540 In-stock
+ rubber -6 In-stock
  pencil 3402 In-stock
  book 0 Out-of-stock
  towel 270 In-stock _ _
