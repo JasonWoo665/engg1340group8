@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 #include "Tons_of_commands.h"
+
 using namespace std;
 
 //*******************************//
@@ -44,23 +46,23 @@ int main() {
 	cout << "List of data:" << endl;
 	Tons_of_commands.printlist(mainlist, n);
 	Tons_of_commands.read_filer(filename2, mainlist);
-	cout << "List of record:" << endl;
+	cout << endl;
+	cout << "List of record for the latest 7-time modifications(before editing):" << endl;
 	Tons_of_commands.printlistr(mainlist, n);
 	cout << endl;
 
 	int command = 0;
 	while (command != 7) {
-		cout << "************************************************************************" << endl;
-		cout << "Select a command to operate:                                           *" << endl;
-		cout << "1. search data                                                         *" << endl;
-		cout << "2. change and update the data                                          *" << endl;
-		cout << "3. sort the data                                                       *" << endl;
-		cout << "4. append new data                                                     *" << endl;
-		cout << "5. show the list of data                                               *" << endl;
-		cout << "6. using least square method to predict the amount of inventory        *" << endl;
-		cout << "   to be kept in the future                                            *" << endl;
-		cout << "7. EXIT                                                                *" << endl;
-		cout << "************************************************************************" << endl;
+		cout << "**************************************************************************" << endl;
+		cout << "* Select a command to operate:                                           *" << endl;
+		cout << "* 1. search data                                                         *" << endl;
+		cout << "* 2. change and update the data                                          *" << endl;
+		cout << "* 3. sort the data                                                       *" << endl;
+		cout << "* 4. append new data                                                     *" << endl;
+		cout << "* 5. show the list of data                                               *" << endl;
+        cout << "* 6. to show the record of the latest 7-time modifications(after editing)*" << endl;
+		cout << "* 7. EXIT                                                                *" << endl;
+		cout << "**************************************************************************" << endl;
 		cout << "->Enter your great command here : ";
 		cin >> command;
 		switch (command) {
@@ -146,7 +148,7 @@ int main() {
 					}
 				}
 			}
-			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.alertcheck(mainlist,n);
 			Tons_of_commands.update(mainlist, filename, n);
 			Tons_of_commands.updater(mainlist, filename2, n);
 			cout << "Enter any number to continue...  ";
@@ -169,7 +171,7 @@ int main() {
 				cin >> x;
 				break;
 			}
-			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.alertcheck(mainlist, n);
 			Tons_of_commands.update(mainlist, filename, n);
 			Tons_of_commands.updater(mainlist, filename2, n);
 			break;
@@ -201,7 +203,7 @@ int main() {
 				cout << "Fail to sort the data." << endl;
 				break;
 			}
-			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.alertcheck(mainlist, n);
 			cout << "Enter any number to continue...  ";
 			cin >> x;
 			break;
@@ -209,7 +211,7 @@ int main() {
 			cout << "Please enter the stock name and stock number to be appended to the data base : ";
 			cin >> edit_name >> edit_num;
 			Tons_of_commands.adding_data(filename, mainlist, edit_name, edit_num, n);
-			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.alertcheck(mainlist, n);
 			cout << "Data appended." << endl;
 			cout << "Enter any number to continue...  ";
 			cin >> x;
@@ -217,20 +219,20 @@ int main() {
 		case 5:
 			cout << "List of data:" << endl;
 			Tons_of_commands.printlist(mainlist, n);
-			cout << "List of record:" << endl;
-			Tons_of_commands.printlistr(mainlist, n);
-			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.alertcheck(mainlist, n);
 			Tons_of_commands.updater(mainlist, filename2, n);
 			Tons_of_commands.update(mainlist, filename, n);
 			cout << "Enter any number to continue...  ";
 			cin >> x;
 			break;
 		case 6:
-			Tons_of_commands.lsm(mainlist[0].rec,7);
-			Tons_of_commands.alertcheck(mainlist);
-			Tons_of_commands.updater(mainlist, filename2, n);
-			Tons_of_commands.update(mainlist, filename, n);
+			cout << "List of record for the latest 7-time modifications(after editing):" << endl;
 			Tons_of_commands.printlistr(mainlist, n);
+			Tons_of_commands.alertcheck(mainlist, n);
+			Tons_of_commands.update(mainlist, filename, n);
+			Tons_of_commands.updater(mainlist, filename2, n);
+			cout << endl;
+			break;
 		}//end of switch
 	}//end of while(command !=7)
 
