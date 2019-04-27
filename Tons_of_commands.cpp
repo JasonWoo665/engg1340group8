@@ -129,6 +129,39 @@ int Tons_of_commands::read_file2(string filename, list mainlist[]){
     return count/2;
 }
 
+void Tons_of_commands:: read_filer(string filename, list mainlist[]){
+	string reading_name;
+    int reading_num;
+    //open the file
+    ifstream fin;
+    fin.open(filename.c_str());
+    if (fin.fail()){
+        cout << "No such file exist!" <<endl;
+        exit(1);
+    }
+    //reading data inside the file
+    int count=0;
+    int i = 0;
+    bool canread=true;
+    while (canread){
+    	if (i%8 == 0){
+    		if (fin >> reading_name){	
+    			i += 1;
+    		}
+    		else
+    			canread = false;
+    	
+    	}
+    	else
+    		if (fin >> reading_num){
+				mainlist[i/8].rec[i%8-1] = reading_num;
+    			i += 1;
+    		}
+    		else
+    			canread = false;
+		}
+}
+
 // alert : check and give alert to outofstock item
 void Tons_of_commands::alertcheck(list mainlist[]) {
 	for (int i = 0; i < itemcount("dalist.txt"); i++) {
@@ -499,8 +532,8 @@ void Tons_of_commands::deleting(list mainlist[], int location, int &n) {
 	mainlist[n - 1].name = char(0);
 	mainlist[n - 1].number = 0;
 	for (int z = 0; z < 7; z++){
-				mainlist[n-1].rec[z] = 0;
-		}
+		mainlist[n-1].rec[z] = 0;
+	}
 	n -= 1;
 }
 
@@ -634,9 +667,10 @@ void Tons_of_commands::printlist(list the_list[], int n) {
 //          int n : the number of items inside the list
 void Tons_of_commands::printlistr(list the_list[], int n) {
 	for (int i = 0; i < n; i++) {
-		cout << i + 1 << ". " << the_list[i].name << " ";
-		for (int j = 0; j < n; i++){
+		cout << i + 1 << ". " << the_list[i].name << " ";		
+		for (int j = 0; j < 7; j++){
 			cout << the_list[i].rec[j] << " ";
 		}
+		cout << endl;
 	}
 }
