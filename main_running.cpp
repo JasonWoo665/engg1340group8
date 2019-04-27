@@ -51,14 +51,15 @@ int main() {
 	int command = 0;
 	while (command != 7) {
 		cout << "************************************************************************" << endl;
-		cout << "*	Select a command to operate:                                    *" << endl;
-		cout << "*	1. search data                                                  *" << endl;
-		cout << "*	2. change and update the data                                   *" << endl;
-		cout << "*	3. sort the data                                                *" << endl;
-		cout << "*	4. append new data                                              *" << endl;
-		cout << "*	5. show the list of data                                        *" << endl;
-		cout << "*	6. predict demand in the future                                 *" << endl;
-		cout << "*	7. EXIT                                                         *" << endl;
+		cout << "Select a command to operate:                                           *" << endl;
+		cout << "1. search data                                                         *" << endl;
+		cout << "2. change and update the data                                          *" << endl;
+		cout << "3. sort the data                                                       *" << endl;
+		cout << "4. append new data                                                     *" << endl;
+		cout << "5. show the list of data                                               *" << endl;
+		cout << "6. using least square method to predict the amount of inventory        *" << endl;
+		cout << "   to be kept in the future                                            *" << endl;
+		cout << "7. EXIT                                                                *" << endl;
 		cout << "************************************************************************" << endl;
 		cout << "->Enter your great command here : ";
 		cin >> command;
@@ -124,6 +125,7 @@ int main() {
 					case 1:
 						Tons_of_commands.deleting(mainlist, selected, n);
 						Tons_of_commands.update(mainlist, filename, n);
+						Tons_of_commands.updater(mainlist,filename2,n);
 						cout << "Item successfully deleted!" << endl;
 						break;
 					case 2:
@@ -131,6 +133,7 @@ int main() {
 						cin >> edit_name >> edit_num;
 						Tons_of_commands.edit(mainlist, selected, n, edit_name, edit_num);
 						Tons_of_commands.update(mainlist, filename, n);
+						Tons_of_commands.updater(mainlist,filename2,n);
 						cout << "Item successfully changed!" << endl;
 						break;
 					case 3:
@@ -138,10 +141,14 @@ int main() {
 						cin >> x;
 						Tons_of_commands.adding(mainlist, selected, x);
 						Tons_of_commands.update(mainlist, filename, n);
+						Tons_of_commands.updater(mainlist,filename2,n);
 						cout << "Stock number successfully changed!" << endl;
 					}
 				}
 			}
+			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.update(mainlist, filename, n);
+			Tons_of_commands.updater(mainlist, filename2, n);
 			cout << "Enter any number to continue...  ";
 			cin >> x;
 			break;
@@ -162,6 +169,9 @@ int main() {
 				cin >> x;
 				break;
 			}
+			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.update(mainlist, filename, n);
+			Tons_of_commands.updater(mainlist, filename2, n);
 			break;
 		case 3:
 			cout << "Please choose the method of sorting: " << endl;
@@ -172,25 +182,26 @@ int main() {
 			cin >> x;
 			switch (x) {
 			case 1:
-				Tons_of_commands.sorting_data(mainlist, n, filename, true);
+				Tons_of_commands.sorting_data(mainlist, n, filename, true, filename2);
 				cout << "Data sorted!" << endl;
 				break;
 			case 2:
-				Tons_of_commands.sorting_data(mainlist, n, filename, false);
+				Tons_of_commands.sorting_data(mainlist, n, filename, false, filename2);
 				cout << "Data sorted!" << endl;
 				break;
 			case 3:
-				Tons_of_commands.sorting_data_number(mainlist, n, filename, true);
+				Tons_of_commands.sorting_data_number(mainlist, n, filename, true, filename2);
 				cout << "Data sorted!" << endl;
 				break;
 			case 4:
-				Tons_of_commands.sorting_data_number(mainlist, n, filename, false);
+				Tons_of_commands.sorting_data_number(mainlist, n, filename, false, filename2);
 				cout << "Data sorted!" << endl;
 				break;
 			default:
 				cout << "Fail to sort the data." << endl;
 				break;
 			}
+			Tons_of_commands.alertcheck(mainlist);
 			cout << "Enter any number to continue...  ";
 			cin >> x;
 			break;
@@ -198,7 +209,7 @@ int main() {
 			cout << "Please enter the stock name and stock number to be appended to the data base : ";
 			cin >> edit_name >> edit_num;
 			Tons_of_commands.adding_data(filename, mainlist, edit_name, edit_num, n);
-
+			Tons_of_commands.alertcheck(mainlist);
 			cout << "Data appended." << endl;
 			cout << "Enter any number to continue...  ";
 			cin >> x;
@@ -208,11 +219,17 @@ int main() {
 			Tons_of_commands.printlist(mainlist, n);
 			cout << "List of record:" << endl;
 			Tons_of_commands.printlistr(mainlist, n);
+			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.updater(mainlist, filename2, n);
+			Tons_of_commands.update(mainlist, filename, n);
 			cout << "Enter any number to continue...  ";
 			cin >> x;
 			break;
 		case 6:
-			Tons_of_commands.updater(mainlist, filename, n);
+			Tons_of_commands.lsm(mainlist[0].rec,7);
+			Tons_of_commands.alertcheck(mainlist);
+			Tons_of_commands.updater(mainlist, filename2, n);
+			Tons_of_commands.update(mainlist, filename, n);
 			Tons_of_commands.printlistr(mainlist, n);
 		}//end of switch
 	}//end of while(command !=7)
